@@ -23,6 +23,7 @@ export default function Feed() {
   return (
     <View className="flex-1 ">
       <FocusAwareStatusBar />
+
       <FlashList
         data={data}
         renderItem={renderItem}

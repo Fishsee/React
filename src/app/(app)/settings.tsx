@@ -1,20 +1,22 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Env } from '@env';
+/* eslint-disable max-lines-per-function */
+// Settings.tsx
 import { useColorScheme } from 'nativewind';
+import React from 'react';
 
+import { BrightnessLevelScroller } from '@/components/settings/brightness-level-scroller'; // Import the new BrightnessLevelScroller component
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
-import { LanguageItem } from '@/components/settings/language-item';
-import { ThemeItem } from '@/components/settings/theme-item';
+import { ToggleItem } from '@/components/settings/toggle-item'; // Import the new ToggleItem component
 import { translate, useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { Github, Rate, Share, Support, Website } from '@/ui/icons';
 
-export default function Settings() {
+const Settings: React.FC = () => {
   const signOut = useAuth.use.signOut();
   const { colorScheme } = useColorScheme();
   const iconColor =
     colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
+
   return (
     <>
       <FocusAwareStatusBar />
@@ -24,22 +26,34 @@ export default function Settings() {
           <Text className="text-xl font-bold">
             {translate('settings.title')}
           </Text>
-          <ItemsContainer title="settings.generale">
-            <LanguageItem />
-            <ThemeItem />
+
+          {/* Place the ToggleItem at the top, separated from the rest */}
+          <View className="mb-2">
+            <ToggleItem
+              icon={<Support color={iconColor} />}
+              title={'Test naam'}
+              description={'Woonkamer'}
+              initialValue={true}
+            />
+          </View>
+
+          <ItemsContainer title="settings.info">
+            <Item text="settings.aquariumName" value="TestNaam" />
+            <Item text="settings.aquariumType" value="Fishsee Ultra" />
+            <Item text="settings.aquariumZone" value="Woonkamer" />
+            <Item text="settings.aquariumNummer" value="XL82MGF1Z" />
+            <Item
+              text="settings.aquariumAangesloten"
+              value="08:32 27 Juni 2022"
+            />
           </ItemsContainer>
 
-          <ItemsContainer title="settings.about">
-            <Item text="settings.app_name" value={Env.NAME} />
-            <Item text="settings.version" value={Env.VERSION} />
+          <ItemsContainer title="settings.aquariumBrightness">
+            <BrightnessLevelScroller initialValue={50} />
           </ItemsContainer>
 
           <ItemsContainer title="settings.support_us">
-            <Item
-              text="settings.share"
-              icon={<Share color={iconColor} />}
-              onPress={() => {}}
-            />
+            <Item text="settings.share" icon={<Share />} onPress={() => {}} />
             <Item
               text="settings.rate"
               icon={<Rate color={iconColor} />}
@@ -76,4 +90,6 @@ export default function Settings() {
       </ScrollView>
     </>
   );
-}
+};
+
+export default Settings;
