@@ -11,27 +11,23 @@ import * as z from 'zod';
 import { Button, ControlledInput, Text, TouchableOpacity, View } from '@/ui';
 
 const schema = z.object({
-  name: z.string().optional(),
   email: z
     .string({
       required_error: 'Email is required',
     })
     .email('Invalid email format'),
-  password: z
-    .string({
-      required_error: 'Password is required',
-    })
-    .min(6, 'Password must be at least 6 characters'),
 });
 
 export type FormType = z.infer<typeof schema>;
 
-export type LoginFormProps = {
+export type ForgotPasswordFormProps = {
   onSubmit?: SubmitHandler<FormType>;
 };
 
 // eslint-disable-next-line max-lines-per-function
-export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
+export const ForgotPasswordForm = ({
+  onSubmit = () => {},
+}: ForgotPasswordFormProps) => {
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
   });
@@ -43,13 +39,22 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
   };
 
   return (
-    <View className="flex-1 p-4" style={{ paddingTop: 208 }}>
+    <View className="flex-1 p-4">
+      <TouchableOpacity
+        style={{ flexDirection: 'row', alignItems: 'center', marginTop: 65 }}
+        onPress={() => router.navigate('login')}
+      >
+        <Icon name="arrow-back" size={24} color="#000" />
+        <Text style={{ marginLeft: 8, fontSize: 16, color: '#000' }}>
+          Login
+        </Text>
+      </TouchableOpacity>
       <Text
         testID="form-title"
         className="text-b pb-6 text-[30px] font-bold"
-        style={{ fontSize: 30 }}
+        style={{ paddingTop: 120, fontSize: 30 }}
       >
-        Inloggen
+        Wachtwoord vergeten?
       </Text>
 
       <ControlledInput
@@ -59,50 +64,15 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
         label="Email"
         style={{ backgroundColor: '#FFF', marginBottom: 20 }}
       />
-      <ControlledInput
-        testID="password-input"
-        control={control}
-        name="password"
-        label="Wachtwoord"
-        placeholder="***"
-        secureTextEntry={true}
-        style={{ backgroundColor: '#FFF', marginBottom: 20 }}
-      />
+
       <Button
-        testID="login-button"
-        label="Inloggen"
+        testID="reset-password-button"
+        label="Reset Password"
         onPress={handleSubmit(onSubmit)}
         style={{ height: 48, backgroundColor: '#3772E3' }}
       />
 
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text
-          style={{
-            color: '#000',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            fontSize: 14,
-            marginTop: 10,
-          }}
-          onPress={() => {
-            router.replace('/feed/add-post');
-          }}
-        >
-          Account aanmaken
-        </Text>
-        <Text
-          style={{
-            color: '#000',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            fontSize: 14,
-            marginTop: 10,
-          }}
-          onPress={toggleModal}
-        >
-          Wachtwoord vergeten?
-        </Text>
-      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} />
 
       <Modal
         isVisible={isModalVisible}
@@ -114,14 +84,12 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
             style={styles.modalButton}
             onPress={() => {
               // Handle reset via email
-              router.navigate('/forgot-password');
+              router.navigate('/reset-email');
               toggleModal();
             }}
           >
             <Icon name="mail-outline" size={26} color="#3772E3" />
-            <Text style={styles.modalButtonText}>
-              Reset wachtwoord via Email
-            </Text>
+            <Text style={styles.modalButtonText}>Reset Password via Email</Text>
             <View style={styles.modalCloseIconContainer}>
               <Icon
                 name="arrow-forward"
@@ -140,7 +108,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
             }}
           >
             <Icon name="chatbubble-outline" size={26} color="#3772E3" />
-            <Text style={styles.modalButtonText}>Reset wachtwoord via SMS</Text>
+            <Text style={styles.modalButtonText}>Reset Password via SMS</Text>
             <View style={styles.modalCloseIconContainer}>
               <Icon
                 name="arrow-forward"
