@@ -43,8 +43,12 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
   };
 
   return (
-    <View className="flex-1 p-4 pt-52">
-      <Text testID="form-title" className="text-b pb-6 text-[30px] font-bold">
+    <View className="flex-1 p-4" style={{ paddingTop: 208 }}>
+      <Text
+        testID="form-title"
+        className="text-b pb-6 text-[30px] font-bold"
+        style={{ fontSize: 30 }}
+      >
         Inloggen
       </Text>
 
@@ -81,7 +85,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
             marginTop: 10,
           }}
           onPress={() => {
-            router.replace('/register');
+            router.replace('/feed/add-post');
           }}
         >
           Account aanmaken

@@ -11,26 +11,11 @@ function Login() {
   const router = useRouter();
   const signIn = useAuth.use.signIn();
   useSoftKeyboardEffect();
-
-  const onSubmit: LoginFormProps['onSubmit'] = async (data) => {
-    const response = await fetch('http://100.86.204.58:8000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      console.error('Login failed');
-      return;
-    }
-
-    const { access, refresh } = await response.json();
-    signIn({ access, refresh });
+  const onSubmit: LoginFormProps['onSubmit'] = (data) => {
+    console.log(data);
+    signIn({ access: 'access-token', refresh: 'refresh-token' });
     router.push('/');
   };
-
   return (
     <>
       <FocusAwareStatusBar />

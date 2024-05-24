@@ -48,7 +48,8 @@ export const RegisterForm = ({ onSubmit = () => {} }: RegisterFormProps) => {
 
       <Text
         testID="form-title"
-        className="text-b pb-6 pt-28 text-[30px] font-bold"
+        className="text-b pb-6 font-bold"
+        style={{ paddingTop: 120, fontSize: 30 }}
       >
         Account aanmaken
       </Text>
