@@ -85,7 +85,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
             marginTop: 10,
           }}
           onPress={() => {
-            router.replace('/feed/add-post');
+            router.replace('/register');
           }}
         >
           Account aanmaken

@@ -9,12 +9,12 @@ import { FocusAwareStatusBar } from '@/ui';
 
 function Register() {
   const router = useRouter();
-  const signIn = useAuth.use.signIn();
+  const { signIn } = useAuth();
   useSoftKeyboardEffect();
 
   const onSubmit: RegisterFormProps['onSubmit'] = async (data) => {
     try {
-      const response = await fetch('http://100.86.204.58:8000/api/register', {
+      const response = await fetch('http://127.0.0.1:8000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,8 +23,8 @@ function Register() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Registration failed', errorData);
+        const text = await response.text();
+        console.error('Registration failed', text);
         return;
       }
 
