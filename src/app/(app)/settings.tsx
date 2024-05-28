@@ -6,13 +6,14 @@ import React, { useState } from 'react';
 
 import { ActionButton } from '@/components/settings/action-button';
 import { BrightnessLevelScroller } from '@/components/settings/brightness-level-scroller';
+import { CodeModal } from '@/components/settings/code-modal'; // Import the CodeModal component
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
 import { SearchModal } from '@/components/settings/search-modal'; // Import the SearchModal component
 import { ToggleItem } from '@/components/settings/toggle-item';
 import { translate, useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
-import { Share, Support } from '@/ui/icons';
+import { Code, Disconnect, Support, Wifi } from '@/ui/icons';
 import { ArrowLeft } from '@/ui/icons/arrow-left';
 
 const Settings: React.FC = () => {
@@ -21,15 +22,20 @@ const Settings: React.FC = () => {
   const iconColor =
     colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
 
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isSearchModalVisible, setSearchModalVisible] = useState(false);
+  const [isCodeModalVisible, setCodeModalVisible] = useState(false);
 
   const handleConnectWifi = () => {
-    setModalVisible(true);
+    setSearchModalVisible(true);
     // Simulate searching for devices
     setTimeout(() => {
-      setModalVisible(false);
+      setSearchModalVisible(false);
       // Handle the result of the search here
     }, 5000); // Adjust the duration as needed
+  };
+
+  const handleConnectCode = () => {
+    setCodeModalVisible(true);
   };
 
   return (
@@ -37,7 +43,7 @@ const Settings: React.FC = () => {
       <FocusAwareStatusBar />
 
       <ScrollView>
-        <View className="flex-1 px-4 pb-56 pt-[65px]">
+        <View className="flex-1 px-4 pb-56" style={{ paddingTop: 65 }}>
           <View className="flex flex-row items-center justify-center">
             <ArrowLeft
               className="absolute left-0 mr-2"
@@ -74,25 +80,27 @@ const Settings: React.FC = () => {
           <ItemsContainer title="settings.aquariumBrightness">
             <BrightnessLevelScroller initialValue={50} />
           </ItemsContainer>
-          <Text className="mb-2 mt-[15px] text-[17px]">Acties</Text>
+          <Text className="mb-2" style={{ marginTop: 15, fontSize: 17 }}>
+            Acties
+          </Text>
           <View style={{ marginBottom: 16 }}>
             <ActionButton
-              icon={<Share color={colors.neutral[100]} width={22} />}
+              icon={<Wifi color={colors.neutral[100]} width={22} />}
               title={'Connect Aquarium via wifi'}
               onPress={handleConnectWifi}
               iconBackgroundColor={colors.neutral[600]}
             />
             <ActionButton
-              icon={<Share color={colors.neutral[100]} />}
+              icon={<Code color={colors.neutral[100]} />}
               title={'Connect Aquarium met koppelcode'}
-              onPress={() => {}}
+              onPress={handleConnectCode}
               iconBackgroundColor={colors.neutral[600]}
             />
             <ActionButton
-              icon={<Share color={colors.neutral[100]} />}
-              title={'Connect Aquarium met koppelcode'}
+              icon={<Disconnect color={colors.neutral[100]} />}
+              title={'Disconnect Aquarium'}
               onPress={() => {}}
-              iconBackgroundColor={colors.neutral[600]}
+              iconBackgroundColor={colors.danger[500]}
             />
           </View>
 
@@ -105,8 +113,12 @@ const Settings: React.FC = () => {
       </ScrollView>
 
       <SearchModal
-        visible={isModalVisible}
-        onClose={() => setModalVisible(false)}
+        visible={isSearchModalVisible}
+        onClose={() => setSearchModalVisible(false)}
+      />
+      <CodeModal
+        visible={isCodeModalVisible}
+        onClose={() => setCodeModalVisible(false)}
       />
     </>
   );
