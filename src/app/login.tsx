@@ -15,7 +15,7 @@ function Login() {
   const onSubmit: LoginFormProps['onSubmit'] = async (data) => {
     try {
       const response = await fetch(
-        'https://fishsee.aeternaserver.net/api/login',
+        'http://fishsee.aeternaserver.net/api/login',
         {
           method: 'POST',
           headers: {
