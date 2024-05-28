@@ -12,9 +12,8 @@ import { SearchModal } from '@/components/settings/search-modal'; // Import the 
 import { ToggleItem } from '@/components/settings/toggle-item';
 import { translate, useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
-import { Github, Rate, Share, Support, Website } from '@/ui/icons';
+import { Share, Support } from '@/ui/icons';
 import { ArrowLeft } from '@/ui/icons/arrow-left';
-import Code from '../code';
 
 const Settings: React.FC = () => {
   const signOut = useAuth.use.signOut();
@@ -78,24 +77,24 @@ const Settings: React.FC = () => {
           <Text className="mb-2 mt-[15px] text-[17px]">Acties</Text>
           <View style={{ marginBottom: 16 }}>
             <ActionButton
-              icon={<Wifi color={colors.neutral[100]} width={22} />}
+              icon={<Share color={colors.neutral[100]} width={22} />}
               title={'Connect Aquarium via wifi'}
               onPress={handleConnectWifi}
               iconBackgroundColor={colors.neutral[600]}
             />
             <ActionButton
-              icon={<Code color={colors.neutral[100]} />}
+              icon={<Share color={colors.neutral[100]} />}
               title={'Connect Aquarium met koppelcode'}
               onPress={() => {}}
               iconBackgroundColor={colors.neutral[600]}
             />
-            <Item
-              text="settings.website"
-              icon={<Website color={iconColor} />}
+            <ActionButton
+              icon={<Share color={colors.neutral[100]} />}
+              title={'Connect Aquarium met koppelcode'}
               onPress={() => {}}
-              iconBackgroundColor={colors.danger[500]}
+              iconBackgroundColor={colors.neutral[600]}
             />
-          </ItemsContainer>
+          </View>
 
           <View>
             <ItemsContainer>
