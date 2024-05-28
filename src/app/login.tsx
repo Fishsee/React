@@ -14,13 +14,16 @@ function Login() {
 
   const onSubmit: LoginFormProps['onSubmit'] = async (data) => {
     try {
-      const response = await fetch('https://aeternaserver.net/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        'https://fishsee.aeternaserver.net/api/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
