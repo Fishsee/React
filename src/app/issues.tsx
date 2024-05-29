@@ -1,13 +1,52 @@
+import { router } from 'expo-router';
 import React from 'react';
 
-import { Button, FocusAwareStatusBar, View } from '@/ui';
+import IssueCard from '@/components/issue-card';
+import { colors, FocusAwareStatusBar, Text, View } from '@/ui';
+import { ArrowLeft, ArrowRight, Share } from '@/ui/icons';
 
 function Issues() {
   return (
     <>
       <FocusAwareStatusBar />
-      <View className="flex flex-1 items-center ">
-        <Button className="mt-[100px] h-[8%] w-[75%] rounded-md border-[1px] border-neutral-300 bg-[#F5F3F3] p-2 " />
+      <View className="flex-1 px-4 pb-56" style={{ paddingTop: 60 }}>
+        <View className="flex flex-row items-center justify-center">
+          <ArrowLeft
+            className="absolute left-0 mr-2"
+            style={{ position: 'absolute', left: 0 }}
+            onPress={() => {
+              router.back();
+            }}
+          />
+          <Text className="text-xl font-semibold">Problemen</Text>
+        </View>
+
+        <View className="flex flex-1 items-center pt-4">
+          <IssueCard
+            iconLeft={<Share color={colors.neutral[600]} />}
+            mainText="pH waarde laag"
+            subText="Urgent"
+            iconRight={<ArrowRight color={colors.neutral[400]} />}
+          />
+          <IssueCard
+            iconLeft={<Share color={colors.neutral[600]} />}
+            mainText="Voedselniveau laag"
+            subText="Urgent"
+            iconRight={<ArrowRight color={colors.neutral[400]} />}
+          />
+          <IssueCard
+            iconLeft={<Share color={colors.neutral[600]} />}
+            mainText="Turbiditeit hoog"
+            subText="Urgent"
+            iconRight={<ArrowRight color={colors.neutral[400]} />}
+          />
+          <IssueCard
+            iconLeft={<Share color={colors.neutral[600]} />}
+            mainText="Watercirculatie laag"
+            subText="Urgent"
+            iconRight={<ArrowRight color={colors.neutral[400]} />}
+          />
+        </View>
       </View>
     </>
   );

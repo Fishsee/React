@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { neutral } from '@/ui/colors';
+
 interface IssueCardProps {
   iconLeft: React.ReactNode;
   mainText: string;
@@ -33,15 +35,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F5F3F3',
+    backgroundColor: '#fff',
     borderRadius: 8,
     marginBottom: 8,
     elevation: 2,
-    width: 300,
+    width: 350,
     marginTop: 15,
     height: 75,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: neutral[200],
   },
   iconContainer: {
     marginHorizontal: 2,
@@ -55,10 +57,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 4,
     marginLeft: 18,
+    color: '#111',
   },
   subText: {
     fontSize: 14,
-    color: '#666',
+    color: '#111',
     marginLeft: 18,
   },
 });
