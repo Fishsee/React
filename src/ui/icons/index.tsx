@@ -1,6 +1,8 @@
 export * from './arrow-left';
 export * from './arrow-right';
 export * from './caret-down';
+export * from './code';
+export * from './disconnect';
 export * from './feed';
 export * from './github';
 export * from './home';
@@ -12,3 +14,4 @@ export * from './share';
 export * from './style';
 export * from './support';
 export * from './website';
+export * from './wifi';
