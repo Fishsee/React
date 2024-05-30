@@ -15,7 +15,7 @@ function Register() {
   const onSubmit: RegisterFormProps['onSubmit'] = async (data) => {
     try {
       const response = await fetch(
-        'http://fishsee.aeternaserver.net/api/login',
+        'https://fishsee.aeternaserver.net/api/register',
         {
           method: 'POST',
           headers: {

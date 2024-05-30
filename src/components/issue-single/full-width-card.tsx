@@ -32,13 +32,17 @@ export const FullWidthCard: React.FC<FullWidthCardProps> = ({
       </View>
       <View style={styles.content}>
         <View style={styles.block}>
-          <View style={styles.iconBackground}>{icon1}</View>
-          <Text style={styles.blockTitle}>{title1}</Text>
+          <View style={styles.iconTitleContainer}>
+            <View style={styles.iconBackground}>{icon1}</View>
+            <Text style={styles.blockTitle}>{title1}</Text>
+          </View>
           <Text style={styles.blockValue}>{value1}</Text>
         </View>
         <View style={styles.block}>
-          <View style={styles.iconBackground}>{icon2}</View>
-          <Text style={styles.blockTitle}>{title2}</Text>
+          <View style={styles.iconTitleContainer}>
+            <View style={styles.iconBackground}>{icon2}</View>
+            <Text style={styles.blockTitle}>{title2}</Text>
+          </View>
           <Text style={styles.blockValue}>{value2}</Text>
         </View>
       </View>
@@ -49,27 +53,28 @@ export const FullWidthCard: React.FC<FullWidthCardProps> = ({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 20,
     marginVertical: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowRadius: 6,
     elevation: 5,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
+    color: colors.primary[900],
   },
   date: {
     fontSize: 16,
-    color: colors.neutral[500],
+    color: colors.neutral[600],
   },
   content: {
     flexDirection: 'row',
@@ -78,18 +83,26 @@ const styles = StyleSheet.create({
   block: {
     alignItems: 'center',
   },
+  iconTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   iconBackground: {
     backgroundColor: colors.primary[500],
-    borderRadius: 25,
+    borderRadius: 20,
     padding: 10,
-    marginBottom: 10,
+    marginRight: 10,
   },
   blockTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: colors.primary[900],
   },
   blockValue: {
     fontSize: 14,
-    color: colors.neutral[500],
+    color: colors.neutral[600],
+    marginTop: 5,
   },
 });
+
+export default FullWidthCard;
