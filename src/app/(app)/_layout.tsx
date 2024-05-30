@@ -6,8 +6,8 @@ import { useAuth, useIsFirstTime } from '@/core';
 import { Pressable, Text } from '@/ui';
 import {
   Feed as FeedIcon,
+  Issues as IssuesIcon,
   Settings as SettingsIcon,
-  Style as StyleIcon,
 } from '@/ui/icons';
 
 export default function TabLayout() {
@@ -35,7 +35,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Dashboard',
+          title: 'Overzicht',
           tabBarIcon: ({ color }) => <FeedIcon color={color} />,
           headerRight: () => <CreateNewPostLink />,
           tabBarTestID: 'feed-tab',
@@ -43,12 +43,12 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="style"
+        name="issues"
         options={{
-          title: 'Style',
+          title: 'Problemen',
           headerShown: false,
-          tabBarIcon: ({ color }) => <StyleIcon color={color} />,
-          tabBarTestID: 'style-tab',
+          tabBarIcon: ({ color }) => <IssuesIcon color={color} />,
+          tabBarTestID: 'issues-tab',
         }}
       />
       <Tabs.Screen
