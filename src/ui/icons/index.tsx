@@ -7,6 +7,7 @@ export * from './feed';
 export * from './github';
 export * from './happy';
 export * from './home';
+export * from './issues';
 export * from './language';
 export * from './rate';
 export * from './sad';

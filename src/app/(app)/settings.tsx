@@ -14,7 +14,6 @@ import { ToggleItem } from '@/components/settings/toggle-item';
 import { translate, useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { Code, Disconnect, Support, Wifi } from '@/ui/icons';
-import { ArrowLeft } from '@/ui/icons/arrow-left';
 
 const Settings: React.FC = () => {
   const signOut = useAuth.use.signOut();
@@ -45,13 +44,6 @@ const Settings: React.FC = () => {
       <ScrollView>
         <View className="flex-1 px-4 pb-56" style={{ paddingTop: 65 }}>
           <View className="flex flex-row items-center justify-center">
-            <ArrowLeft
-              className="absolute left-0 mr-2"
-              style={{ left: 0 }}
-              onPress={() => {
-                router.back();
-              }}
-            />
             <Text className="text-xl font-semibold">
               {translate('settings.title')}
             </Text>
@@ -100,7 +92,7 @@ const Settings: React.FC = () => {
               icon={<Disconnect color={colors.neutral[100]} />}
               title={'Disconnect Aquarium'}
               onPress={() => {
-                router.replace('/');
+                router.replace('/issue-single');
               }}
               iconBackgroundColor={colors.danger[500]}
             />
