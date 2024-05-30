@@ -42,6 +42,7 @@ function RootLayoutNav() {
         <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
         <Stack.Screen name="code" options={{ headerShown: false }} />
         <Stack.Screen name="issue-single" options={{ headerShown: false }} />
+        <Stack.Screen name="issues" options={{ headerShown: false }} />
       </Stack>
     </Providers>
   );

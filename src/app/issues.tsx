@@ -15,7 +15,7 @@ function Issues() {
             className="absolute left-0 mr-2"
             style={{ position: 'absolute', left: 0 }}
             onPress={() => {
-              router.back();
+              router.replace('/');
             }}
           />
           <Text className="text-xl font-semibold">Problemen</Text>

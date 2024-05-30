@@ -99,7 +99,9 @@ const Settings: React.FC = () => {
             <ActionButton
               icon={<Disconnect color={colors.neutral[100]} />}
               title={'Disconnect Aquarium'}
-              onPress={() => {}}
+              onPress={() => {
+                router.replace('/');
+              }}
               iconBackgroundColor={colors.danger[500]}
             />
           </View>

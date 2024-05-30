@@ -5,7 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { FullWidthCard } from '@/components/issue-single/full-width-card';
 import { HalfWidthCard } from '@/components/issue-single/half-width-card';
 import { colors, Text } from '@/ui/';
-import { ArrowLeft, Share } from '@/ui/icons';
+import { ArrowLeft, Happy, Sad } from '@/ui/icons';
 
 const IssueSingle: React.FC = () => {
   return (
@@ -13,9 +13,9 @@ const IssueSingle: React.FC = () => {
       <View className="flex flex-row items-center justify-center">
         <ArrowLeft
           className="absolute left-0 mr-2"
-          style={{ left: 20 }}
+          style={{ left: 15 }}
           onPress={() => {
-            router.back();
+            router.replace('/issues');
           }}
         />
         <Text className="text-xl font-semibold">PH Waarde Probleem</Text>
@@ -25,34 +25,40 @@ const IssueSingle: React.FC = () => {
         <FullWidthCard
           title="Current Issue"
           date="29 May 2024"
-          icon1={<Share color={colors.neutral[200]} />}
-          title1="Temperature"
-          value1="24°C"
-          icon2={<Share color={colors.neutral[200]} />}
-          title2="pH Level"
-          value2="7.4"
+          icon1={<Sad color={colors.white} />}
+          title1="Jouw waarde"
+          value1="6,3"
+          status1="bad"
+          icon2={<Happy color={colors.white} />}
+          title2="Streefwaarde"
+          value2="7,0"
+          status2="good"
         />
         <View style={styles.halfWidthCardsContainer}>
           <HalfWidthCard
-            icon={<Share color={colors.neutral[200]} />}
-            title="Card 1"
-            description="Description for card 1"
+            status="primary"
+            icon={<Happy color={colors.white} />}
+            title="Water verversen"
+            description="20/30% van de inhoud"
             onWhyPress={() => alert('Waarom? for Card 1')}
           />
           <HalfWidthCard
-            icon={<Share color={colors.neutral[200]} />}
-            title="Card 2"
-            description="Description for card 2"
+            status="secondary"
+            icon={<Happy color={colors.neutral[200]} />}
+            title="PH+ tabletten"
+            description="Toevoegen"
             onWhyPress={() => alert('Waarom? for Card 2')}
           />
           <HalfWidthCard
-            icon={<Share color={colors.neutral[200]} />}
-            title="Card 3"
+            status="secondary"
+            icon={<Happy color={colors.neutral[200]} />}
+            title="Soda bicarbonaat"
             description="Description for card 3"
             onWhyPress={() => alert('Waarom? for Card 3')}
           />
           <HalfWidthCard
-            icon={<Share color={colors.neutral[200]} />}
+            status="secondary"
+            icon={<Happy color={colors.neutral[200]} />}
             title="Card 4"
             description="Description for card 4"
             onWhyPress={() => alert('Waarom? for Card 4')}
@@ -65,7 +71,7 @@ const IssueSingle: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 15,
   },
   halfWidthCardsContainer: {
     flexDirection: 'row',
