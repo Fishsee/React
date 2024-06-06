@@ -1,7 +1,9 @@
 import { router } from 'expo-router';
 import React from 'react';
+import { Image } from 'react-native';
 
-import { FocusAwareStatusBar, Text, View } from '@/ui';
+import WaterQuality from '@/components/problem-card';
+import { FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
 import { ArrowLeft } from '@/ui/icons';
 
 function Issues() {
@@ -23,6 +25,21 @@ function Issues() {
               Potentiële problemen
             </Text>
           </View>
+          <View className="mt-[80px] flex h-1/2 items-center justify-center">
+            <Image
+              source={require('../../../assets/img/sad.png')}
+              style={{ width: 120, height: 120 }}
+            />
+            <Text className="mt-4 text-2xl font-bold text-white">
+              Er zijn enkele problemen...
+            </Text>
+            <Text className="text-xl text-white">
+              Er zijn potentiële problemen gedetecteerd.
+            </Text>
+          </View>
+          <SafeAreaView>
+            <WaterQuality title="Waterkwaliteit" index={0.5} />
+          </SafeAreaView>
         </View>
       </View>
     </>
