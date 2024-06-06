@@ -1,6 +1,5 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
 import { FocusAwareStatusBar, Text, View } from '@/ui';
 import { ArrowLeft } from '@/ui/icons';
@@ -10,10 +9,7 @@ function Issues() {
     <>
       <FocusAwareStatusBar />
 
-      <View
-        className="h-2/5 rounded-[40px] bg-[#3C6FD1]"
-        style={styles.gradientContainer}
-      >
+      <View className="h-1/2 rounded-[40px] bg-[#3a75e1]">
         <View className="flex-1 px-4 pb-56" style={{ paddingTop: 60 }}>
           <View className="flex flex-row items-center justify-center">
             <ArrowLeft
@@ -23,15 +19,14 @@ function Issues() {
                 router.replace('/');
               }}
             />
-            <Text className="text-xl font-semibold">Potentiële problemen</Text>
+            <Text className="text-xl font-semibold color-white">
+              Potentiële problemen
+            </Text>
           </View>
         </View>
       </View>
     </>
   );
 }
-const styles = StyleSheet.create({
-  gradientContainer: {},
-});
 
 export default Issues;

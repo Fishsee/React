@@ -52,6 +52,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="potential-issues"
+        options={{
+          title: 'Potentieel',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <IssuesIcon color={color} />,
+          tabBarTestID: 'potential-issues-tab',
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           title: 'Instellingen',
@@ -66,7 +75,7 @@ export default function TabLayout() {
 
 const CreateNewPostLink = () => {
   return (
-    <Link href="/feed/add-post" asChild>
+    <Link href="/potential-issues" asChild>
       <Pressable>
         <Text className="px-3 text-primary-300">Create</Text>
       </Pressable>
