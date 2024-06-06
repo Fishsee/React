@@ -9,7 +9,7 @@ import { FocusAwareStatusBar, View } from '@/ui';
 export default function Dashboard() {
   return (
     <ScrollView>
-      <View className="flex-1 ">
+      <View className="flex-1 pb-5">
         <FocusAwareStatusBar />
         <GraphCard />
         <ProblemsCard />

@@ -1,8 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons'; // Example icon library
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
-import Tooltip from 'react-native-walkthrough-tooltip';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -30,19 +29,6 @@ const chartConfig = {
 };
 
 const DashboardCard: React.FC = () => {
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
-  const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
-  const [tooltipPosition, setTooltipPosition] = useState<{
-    x: number;
-    y: number;
-  }>({ x: 0, y: 0 });
-
-  const handleDataPointClick = (data: any) => {
-    setSelectedValue(data.value);
-    setTooltipPosition({ x: data.x, y: data.y });
-    setTooltipVisible(true);
-  };
-
   return (
     <View style={styles.cardContainer}>
       <View style={styles.card}>
@@ -57,7 +43,6 @@ const DashboardCard: React.FC = () => {
             chartConfig={chartConfig}
             bezier
             style={styles.chart}
-            onDataPointClick={handleDataPointClick}
           />
           <View style={styles.infoContainer}>
             <View style={styles.infoItem}>
@@ -74,18 +59,8 @@ const DashboardCard: React.FC = () => {
               <Text style={styles.infoText}>Goed</Text>
             </View>
           </View>
-          {selectedValue !== null && (
-            <Tooltip
-              isVisible={tooltipVisible}
-              content={<Text>Value: {selectedValue}</Text>}
-              placement="top"
-              onClose={() => setTooltipVisible(false)}
-              topAdjustment={-tooltipPosition.y - 10} // Adjust to position above the data point
-              horizontalAdjustment={tooltipPosition.x - screenWidth / 2}
-            >
-              <View />
-            </Tooltip>
-          )}
+
+          <View />
         </View>
       </View>
     </View>
