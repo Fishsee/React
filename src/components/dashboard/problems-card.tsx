@@ -54,7 +54,7 @@ const Card = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: 20,
     flex: 1,
   },
   title: {

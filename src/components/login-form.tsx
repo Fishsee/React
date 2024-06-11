@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as z from 'zod';
@@ -43,7 +43,11 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
   };
 
   return (
-    <View className="flex-1 p-4" style={{ paddingTop: 208 }}>
+    <View className="flex-1 p-4" style={{ paddingTop: 250 }}>
+      <Image
+        source={require('/assets/logo.png')} // Make sure to replace with your actual logo path
+        style={styles.logo}
+      />
       <Text
         testID="form-title"
         className="text-b pb-6 text-[30px] font-bold"
@@ -157,6 +161,14 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
 };
 
 const styles = StyleSheet.create({
+  logo: {
+    position: 'absolute',
+    top: 75,
+    width: 73,
+    height: 65,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   modal: {
     justifyContent: 'flex-end',
     margin: 0,

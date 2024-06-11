@@ -1,8 +1,8 @@
 {
   "images": [
     {
+      "filename": "8153111151.png",
       "idiom": "universal",
-      "filename": "image.png",
       "scale": "1x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info": {
-    "version": 1,
-    "author": "expo"
+    "author": "xcode",
+    "version": 1
   }
 }

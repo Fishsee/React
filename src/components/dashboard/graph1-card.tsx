@@ -38,7 +38,7 @@ const DashboardCard: React.FC = () => {
           </Text>
           <LineChart
             data={data}
-            width={screenWidth - 65} // Adjust width to fit within the card
+            width={screenWidth - 45} // Adjust width to fit within the card
             height={100}
             chartConfig={chartConfig}
             bezier
@@ -75,16 +75,15 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#2179FF',
     borderRadius: 15,
-    width: 380,
-    height: 250, // Increased height to accommodate the chart
+    paddingBottom: 15,
   },
   headerText: {
     color: 'white',
-    fontSize: 19,
+    fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 20,
     paddingTop: 20,
-    paddingLeft: 25,
+    paddingLeft: 10,
   },
   content: {
     position: 'relative',
@@ -104,12 +103,12 @@ const styles = StyleSheet.create({
   },
   infoText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 15,
     marginLeft: 5,
   },
   infoValue: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 5,
   },

@@ -7,6 +7,7 @@ import { Pressable, Text } from '@/ui';
 import {
   Feed as FeedIcon,
   Issues as IssuesIcon,
+  Potential,
   Settings as SettingsIcon,
 } from '@/ui/icons';
 
@@ -56,7 +57,7 @@ export default function TabLayout() {
         options={{
           title: 'Potentieel',
           headerShown: false,
-          tabBarIcon: ({ color }) => <IssuesIcon color={color} />,
+          tabBarIcon: ({ color }) => <Potential color={color} />,
           tabBarTestID: 'potential-issues-tab',
         }}
       />

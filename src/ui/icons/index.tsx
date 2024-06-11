@@ -9,6 +9,7 @@ export * from './happy';
 export * from './home';
 export * from './issues';
 export * from './language';
+export * from './potential';
 export * from './rate';
 export * from './sad';
 export * from './search';

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderColor: '#E5E5E5',
   },
   container: {
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     flex: 1,
   },
   subtitle: {
