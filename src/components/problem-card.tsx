@@ -10,6 +10,9 @@ const WaterQuality: React.FC<WaterQualityProps> = ({ title, index }) => {
   // Constrain index between 0 and 1
   const constrainedIndex = Math.min(1, Math.max(0, index));
 
+  // Add padding to the index position to keep the triangle away from the edges
+  const adjustedIndex = constrainedIndex * 0.9 + 0.05;
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -23,7 +26,7 @@ const WaterQuality: React.FC<WaterQualityProps> = ({ title, index }) => {
       <View style={styles.sliderContainer}>
         <Text style={styles.sliderText}>Slecht</Text>
         <View style={styles.slider}>
-          <View style={[styles.marker, { left: `${constrainedIndex * 100}%` }]}>
+          <View style={[styles.marker, { left: `${adjustedIndex * 100}%` }]}>
             <View style={styles.triangle} />
           </View>
         </View>
@@ -35,17 +38,16 @@ const WaterQuality: React.FC<WaterQualityProps> = ({ title, index }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: 16,
     backgroundColor: '#F5F7FE',
-    borderRadius: 16,
+    borderRadius: 8,
     width: '90%',
     alignSelf: 'center',
-    marginTop: 40,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 4,
+    marginBottom: 16,
   },
   headerText: {
     color: '#B0B0B0',
@@ -55,21 +57,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 28,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   index: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   sliderContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 14,
-    marginTop: 8,
   },
   sliderText: {
     flex: 1,
@@ -86,8 +86,7 @@ const styles = StyleSheet.create({
   marker: {
     position: 'absolute',
     top: -8,
-    width: 0,
-    height: 0,
+    marginLeft: -8, // Offset by half the width of the triangle to center it
   },
   triangle: {
     width: 0,
@@ -98,7 +97,6 @@ const styles = StyleSheet.create({
     borderRightColor: 'transparent',
     borderBottomWidth: 8,
     borderBottomColor: '#000',
-    alignSelf: 'center',
   },
 });
 
