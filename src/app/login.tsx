@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React from 'react';
 
+import { setAuthToken } from '@/app/globals';
 import type { LoginFormProps } from '@/components/login-form';
 import { LoginForm } from '@/components/login-form';
 import { useAuth } from '@/core';
@@ -31,7 +32,9 @@ function Login() {
         return;
       }
 
-      const { access, refresh } = await response.json();
+      const { access, refresh, token } = await response.json();
+      console.log('Token:', token); // Log the token
+      setAuthToken(token); // Save the token to the global variable
       signIn({ access, refresh });
       router.push('/');
     } catch (error) {
