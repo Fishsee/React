@@ -12,6 +12,7 @@ export default function Dashboard() {
       <View className="flex-1" style={{ paddingBottom: 20 }}>
         <FocusAwareStatusBar />
         <GraphCard />
+
         <ProblemsCard />
         <FoodCard percentage={50} />
       </View>

@@ -2,7 +2,14 @@ import React from 'react';
 import { Dimensions, ScrollView, Text } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 
-const SensorStat = ({ sensorName, data, labels, yAxisUnit }) => {
+interface SensorStatProps {
+  sensorName: string;
+  data: number[];
+  labels: string[];
+  yAxisUnit?: string;
+}
+
+const SensorStat: React.FC<SensorStatProps> = ({ data, labels, yAxisUnit }) => {
   const screenWidth = Dimensions.get('window').width;
 
   const chartConfig = {
@@ -21,7 +28,6 @@ const SensorStat = ({ sensorName, data, labels, yAxisUnit }) => {
           labels: labels,
           datasets: [
             {
-              label: sensorName,
               data: data,
             },
           ],

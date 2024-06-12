@@ -5,25 +5,34 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import SensorStat from '@/components/sensor-stat';
 import useAuthToken from '@/hooks/useAuthToken';
 
+interface DataState {
+  data: number[];
+  labels: string[];
+}
+
 const Stats = () => {
   const token = useAuthToken();
-  const [phData, setPhData] = useState({
+  const [phData, setPhData] = useState<DataState>({
     data: [],
     labels: [],
   });
-  const [temperatureData, setTemperatureData] = useState({
+  const [temperatureData, setTemperatureData] = useState<DataState>({
     data: [],
     labels: [],
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    const fetchData = async (url, setData, dataKey) => {
+    const fetchData = async (
+      url: string,
+      setData: React.Dispatch<React.SetStateAction<DataState>>,
+      dataKey: string
+    ) => {
       setLoading(true);
       try {
         const response = await fetch(url, {
@@ -39,16 +48,20 @@ const Stats = () => {
           );
         }
         const jsonData = await response.json();
-        const labels = jsonData.data.map((_, index) => `Sample ${index + 1}`);
-        const data = jsonData.data.map((item) => {
+        const labels = jsonData.data.map(
+          (_: any, index: number) => `Sample ${index + 1}`
+        );
+        const data = jsonData.data.map((item: any) => {
           const value = parseFloat(item[dataKey]);
           return isNaN(value) ? 0 : value;
         });
 
         setData({ data, labels });
-      } catch (error) {
-        setError('Failed to fetch data: ' + error.message);
-        console.error('Fetch error:', error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError('Failed to fetch data: ' + error.message);
+          console.error('Fetch error:', error);
+        }
       } finally {
         setLoading(false);
       }
