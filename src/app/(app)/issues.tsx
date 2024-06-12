@@ -1,20 +1,11 @@
 import { router } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { getAuthToken } from '@/app/globals'; // Ensure the path is correct based on your project structure
 import IssueCard from '@/components/issue-card';
 import { colors, FocusAwareStatusBar, Text, View } from '@/ui';
 import { ArrowLeft, ArrowRight, Share } from '@/ui/icons';
 
 function Issues() {
-  const [token, setToken] = useState(null);
-
-  useEffect(() => {
-    const token = getAuthToken(); // Get the token from the global variable
-    setToken(token); // Set the token to state
-    console.log('Token:', token); // Log the token or use it as needed
-  }, []);
-
   return (
     <>
       <FocusAwareStatusBar />
@@ -55,10 +46,6 @@ function Issues() {
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}
           />
-        </View>
-
-        <View className="mt-4 flex items-center justify-center">
-          <Text className="text-xl font-semibold">Token: {token}</Text>
         </View>
       </View>
     </>
