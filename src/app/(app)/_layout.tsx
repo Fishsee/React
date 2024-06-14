@@ -9,6 +9,7 @@ import {
   Issues as IssuesIcon,
   Potential,
   Settings as SettingsIcon,
+  Stats,
 } from '@/ui/icons';
 
 export default function TabLayout() {
@@ -63,6 +64,15 @@ export default function TabLayout() {
           headerShown: false,
           tabBarIcon: ({ color }) => <Potential color={color} />,
           tabBarTestID: 'potential-issues-tab',
+        }}
+      />
+      <Tabs.Screen
+        name="statistics"
+        options={{
+          title: 'Statistieken',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Stats color={color} />,
+          tabBarTestID: 'stats-tab',
         }}
       />
     </Tabs>

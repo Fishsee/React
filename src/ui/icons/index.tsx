@@ -15,6 +15,7 @@ export * from './sad';
 export * from './search';
 export * from './settings';
 export * from './share';
+export * from './stats';
 export * from './style';
 export * from './support';
 export * from './website';
