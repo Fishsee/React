@@ -120,21 +120,30 @@ export const Input = React.forwardRef<TextInput, NInputProps>((props, ref) => {
   );
 });
 
+interface ControlledInputProps<T> extends NInputProps {
+  control: Control<T>;
+  name: Path<T>;
+  rules?: TRule | undefined; // Update this line
+  right?: React.ReactNode; // Add this line
+}
 // only used with react-hook-form
 export function ControlledInput<T extends FieldValues>(
   props: ControlledInputProps<T>
 ) {
-  const { name, control, rules, ...inputProps } = props;
+  const { name, control, rules, right, ...inputProps } = props; // Add 'right' here
 
   const { field, fieldState } = useController({ control, name, rules });
   return (
-    <Input
-      ref={field.ref}
-      autoCapitalize="none"
-      onChangeText={field.onChange}
-      value={(field.value as string) || ''}
-      {...inputProps}
-      error={fieldState.error?.message}
-    />
+    <View>
+      <Input
+        ref={field.ref}
+        autoCapitalize="none"
+        onChangeText={field.onChange}
+        value={(field.value as string) || ''}
+        {...inputProps}
+        error={fieldState.error?.message}
+      />
+      {right}
+    </View>
   );
 }

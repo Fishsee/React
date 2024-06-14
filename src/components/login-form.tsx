@@ -14,14 +14,14 @@ const schema = z.object({
   name: z.string().optional(),
   email: z
     .string({
-      required_error: 'Email is required',
+      required_error: 'Email is verplicht',
     })
-    .email('Invalid email format'),
+    .email('Ongeldig e-mailadres'),
   password: z
     .string({
-      required_error: 'Password is required',
+      required_error: 'Wachtwoord is verplicht',
     })
-    .min(6, 'Password must be at least 6 characters'),
+    .min(6, 'Wachtwoord moet minimaal 6 tekens bevatten'),
 });
 
 export type FormType = z.infer<typeof schema>;
@@ -32,6 +32,7 @@ export type LoginFormProps = {
 
 // eslint-disable-next-line max-lines-per-function
 export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
   });
@@ -69,8 +70,24 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
         name="password"
         label="Wachtwoord"
         placeholder="***"
-        secureTextEntry={true}
+        // Use the state variable for the secureTextEntry prop
+        secureTextEntry={!passwordVisible}
         style={{ backgroundColor: '#FFF', marginBottom: 20 }}
+        // Add a button to toggle password visibility
+        right={
+          <Text
+            style={{
+              fontSize: 15,
+              fontWeight: '600',
+              marginLeft: 10,
+              position: 'absolute',
+              right: 0,
+            }}
+            onPress={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? 'Wachtwoord verbergen' : 'Wachtwoord weergeven'}
+          </Text>
+        }
       />
       <Button
         testID="login-button"
