@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Link, Redirect, SplashScreen, Tabs } from 'expo-router';
+import { Redirect, router, SplashScreen, Tabs } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
 
 import { useAuth, useIsFirstTime } from '@/core';
-import { Pressable, Text } from '@/ui';
+import { TouchableOpacity } from '@/ui';
 import {
   Feed as FeedIcon,
   Issues as IssuesIcon,
@@ -38,7 +38,11 @@ export default function TabLayout() {
         options={{
           title: 'Overzicht',
           tabBarIcon: ({ color }) => <FeedIcon color={color} />,
-          headerRight: () => <CreateNewPostLink />,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.replace('/settings')}>
+              <SettingsIcon color={'#1a1a1a'} style={{ marginRight: 20 }} />
+            </TouchableOpacity>
+          ),
           tabBarTestID: 'feed-tab',
         }}
       />
@@ -61,25 +65,6 @@ export default function TabLayout() {
           tabBarTestID: 'potential-issues-tab',
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Instellingen',
-          headerShown: false,
-          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
-          tabBarTestID: 'settings-tab',
-        }}
-      />
     </Tabs>
   );
 }
-
-const CreateNewPostLink = () => {
-  return (
-    <Link href="/potential-issues" asChild>
-      <Pressable>
-        <Text className="px-3 text-primary-300">Create</Text>
-      </Pressable>
-    </Link>
-  );
-};

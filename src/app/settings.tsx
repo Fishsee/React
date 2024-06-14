@@ -11,9 +11,9 @@ import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
 import { SearchModal } from '@/components/settings/search-modal'; // Import the SearchModal component
 import { ToggleItem } from '@/components/settings/toggle-item';
-import { translate, useAuth } from '@/core';
+import { useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
-import { Code, Disconnect, Support, Wifi } from '@/ui/icons';
+import { ArrowLeft, Code, Disconnect, Support, Wifi } from '@/ui/icons';
 
 const Settings: React.FC = () => {
   const signOut = useAuth.use.signOut();
@@ -44,9 +44,14 @@ const Settings: React.FC = () => {
       <ScrollView>
         <View className="flex-1 px-4 pb-56" style={{ paddingTop: 65 }}>
           <View className="flex flex-row items-center justify-center">
-            <Text className="text-xl font-semibold">
-              {translate('settings.title')}
-            </Text>
+            <ArrowLeft
+              className="absolute left-0 mr-2"
+              style={{ left: 15 }}
+              onPress={() => {
+                router.replace('/');
+              }}
+            />
+            <Text className="text-xl font-semibold">Instellingen</Text>
           </View>
 
           <View className="mb-2 mt-3">
