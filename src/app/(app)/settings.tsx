@@ -5,15 +5,16 @@ import { useColorScheme } from 'nativewind';
 import React, { useState } from 'react';
 
 import { ActionButton } from '@/components/settings/action-button';
+import { AddFishModal } from '@/components/settings/add-fish-modal'; // Import the AddFishModal component
 import { BrightnessLevelScroller } from '@/components/settings/brightness-level-scroller';
-import { CodeModal } from '@/components/settings/code-modal'; // Import the CodeModal component
+import { CodeModal } from '@/components/settings/code-modal';
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
 import { SearchModal } from '@/components/settings/search-modal'; // Import the SearchModal component
 import { ToggleItem } from '@/components/settings/toggle-item';
 import { translate, useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
-import { Code, Disconnect, Support, Wifi } from '@/ui/icons';
+import { Code, Disconnect, Feed, Support, Wifi } from '@/ui/icons';
 
 const Settings: React.FC = () => {
   const signOut = useAuth.use.signOut();
@@ -23,7 +24,7 @@ const Settings: React.FC = () => {
 
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const [isCodeModalVisible, setCodeModalVisible] = useState(false);
-
+  const [isAddFishModalVisible, setAddFishModalVisible] = useState(false);
   const handleConnectWifi = () => {
     setSearchModalVisible(true);
     // Simulate searching for devices
@@ -37,12 +38,19 @@ const Settings: React.FC = () => {
     setCodeModalVisible(true);
   };
 
+  const handleAddFish = () => {
+    setAddFishModalVisible(true);
+  };
+
   return (
     <>
       <FocusAwareStatusBar />
 
       <ScrollView>
-        <View className="flex-1 px-4 pb-56" style={{ paddingTop: 65 }}>
+        <View
+          className="flex-1 px-4"
+          style={{ paddingTop: 65, paddingBottom: 25 }}
+        >
           <View className="flex flex-row items-center justify-center">
             <Text className="text-xl font-semibold">
               {translate('settings.title')}
@@ -89,6 +97,12 @@ const Settings: React.FC = () => {
               iconBackgroundColor={colors.neutral[600]}
             />
             <ActionButton
+              icon={<Feed color={colors.neutral[100]} />}
+              title={'Vis toevoegen'}
+              onPress={handleAddFish}
+              iconBackgroundColor={colors.neutral[600]}
+            />
+            <ActionButton
               icon={<Disconnect color={colors.neutral[100]} />}
               title={'Disconnect Aquarium'}
               onPress={() => {
@@ -113,6 +127,11 @@ const Settings: React.FC = () => {
       <CodeModal
         visible={isCodeModalVisible}
         onClose={() => setCodeModalVisible(false)}
+      />
+
+      <AddFishModal
+        visible={isAddFishModalVisible}
+        onClose={() => setAddFishModalVisible(false)}
       />
     </>
   );

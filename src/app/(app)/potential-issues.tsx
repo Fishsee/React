@@ -24,7 +24,7 @@ function Issues() {
                   router.replace('/');
                 }}
               />
-              <Text className="text-xl font-semibold color-white">
+              <Text style={{ fontSize: 18, color: '#fff' }}>
                 Potentiële problemen
               </Text>
             </View>
@@ -46,7 +46,7 @@ function Issues() {
           </View>
         </View>
         <View style={styles.potentialSection}>
-          <Text className="text-[22px]">Potentiële problemen</Text>
+          <Text style={{ fontSize: 22 }}>Potentiële problemen</Text>
           <View style={styles.potentialProblemRow}>
             <PotentialProblemCard
               icon={require('../../../assets/img/temp.png')}
@@ -81,7 +81,7 @@ function Issues() {
           </View>
         </View>
         <View style={styles.tipsSection}>
-          <Text className="text-[22px]">Tips</Text>
+          <Text style={{ fontSize: 22 }}>Tips</Text>
           <TipCard
             icon={require('../../../assets/img/sparkles.png')}
             text="Controleer je voedingssysteem regelmatig"
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   potentialSection: {
     marginTop: 60,
-    marginLeft: 40,
+    marginLeft: 15,
   },
   potentialProblem: {
     width: 150,
@@ -133,10 +133,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 30,
+    width: '100%',
+    paddingLeft: 10,
   },
   tipsSection: {
     marginTop: 40,
-    marginLeft: 40,
+    marginLeft: 15,
     paddingBottom: 40,
   },
 });

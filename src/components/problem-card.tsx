@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#F5F7FE',
     borderRadius: 8,
-    width: '90%',
+    width: '97%',
     alignSelf: 'center',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: 10,
   },
   headerText: {
     color: '#B0B0B0',
@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 30,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   index: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   sliderContainer: {
