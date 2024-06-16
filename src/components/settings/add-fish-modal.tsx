@@ -3,6 +3,8 @@ import { Modal, StyleSheet, View } from 'react-native';
 
 import { colors } from '@/ui';
 
+import FishSearchBar from '../search-bar';
+
 interface addFishModalProps {
   visible: boolean;
   onClose: () => void;
@@ -25,7 +27,9 @@ export const AddFishModal: React.FC<addFishModalProps> = ({
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <></>
+          <>
+            <FishSearchBar />
+          </>
         </View>
       </View>
     </Modal>
