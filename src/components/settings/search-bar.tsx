@@ -1,5 +1,4 @@
 /* eslint-disable max-lines-per-function */
-
 import React, { useEffect, useState } from 'react';
 import {
   Button,
@@ -22,11 +21,18 @@ interface StoredFish {
 
 const fishes: Fish[] = require('./fishes.json');
 
-const FishSearchBar: React.FC = () => {
+interface FishSearchBarProps {
+  storedFishes: StoredFish[];
+  setStoredFishes: React.Dispatch<React.SetStateAction<StoredFish[]>>;
+}
+
+const FishSearchBar: React.FC<FishSearchBarProps> = ({
+  storedFishes,
+  setStoredFishes,
+}) => {
   const [searchText, setSearchText] = useState('');
   const [filteredFishes, setFilteredFishes] = useState<Fish[]>([]);
   const [counter, setCounter] = useState(0);
-  const [storedFishes, setStoredFishes] = useState<StoredFish[]>([]);
 
   const increaseCounter = () => setCounter(counter + 1);
   const decreaseCounter = () => setCounter(Math.max(counter - 1, 0));
@@ -105,7 +111,7 @@ const FishSearchBar: React.FC = () => {
         )}
       </View>
       <View style={styles.storedFishesContainer}>
-        <Text style={styles.storedFishesTitle}>Opgeslagen Vissen:</Text>
+        <Text style={styles.storedFishesTitle}>Huidige Vissen:</Text>
         {storedFishes.map((fish) => (
           <View key={fish.name} style={styles.storedFishRow}>
             <Text style={styles.storedFishText}>
