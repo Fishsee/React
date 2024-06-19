@@ -8,62 +8,68 @@ const screenWidth = Dimensions.get('window').width;
 
 const DashboardCard: React.FC = () => {
   const [userName, setUserName] = useState('');
+  const [aquariumId, setAquariumId] = useState('');
   const [phValue, setPhValue] = useState('');
   const token = useAuthToken();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(
-          'https://fishsee.aeternaserver.net/api/user',
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch user data');
-        }
-
-        const data = await response.json();
-        setUserName(data.name);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
-    const fetchPhValue = async () => {
-      try {
-        const response = await fetch(
-          'https://fishsee.aeternaserver.net/api/last-PH/1',
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error('Failed to fetch PH value');
-        }
-
-        const data = await response.json();
-        setPhValue(data.data.phValue);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
-
     if (token) {
+      const fetchUserData = async () => {
+        try {
+          const response = await fetch(
+            'https://fishsee.aeternaserver.net/api/user',
+            {
+              method: 'GET',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+            }
+          );
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error('Failed to fetch user data');
+          }
+
+          setUserName(data.user.name);
+          setAquariumId(data.aquarium_id);
+          console.log('User data response:', data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
       fetchUserData();
-      fetchPhValue();
     }
   }, [token]);
+
+  useEffect(() => {
+    if (token && aquariumId) {
+      const fetchPhValue = async () => {
+        try {
+          const url = `https://fishsee.aeternaserver.net/api/last-PH/${aquariumId}`;
+          const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          if (!response.ok) {
+            throw new Error('Failed to fetch PH value');
+          }
+
+          const data = await response.json();
+          setPhValue(data.data.phValue);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
+
+      fetchPhValue();
+    }
+  }, [token, aquariumId]);
 
   const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
