@@ -1,4 +1,4 @@
-package com.fishseeappdev.development
+package com.fishseeappdev.staging
 
 import android.os.Build
 import android.os.Bundle
@@ -17,6 +17,7 @@ class MainActivity : ReactActivity() {
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
     super.onCreate(null)
+
   }
 
   /**
