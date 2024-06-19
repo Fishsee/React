@@ -78,6 +78,46 @@ const FishSearchBar: React.FC<FishSearchBarProps> = ({
     );
   };
 
+  const checkGuppyWithBetta = () => {
+    const hasGuppy = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'guppy'
+    );
+    const hasBetta = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'betta'
+    );
+    return hasGuppy && hasBetta;
+  };
+
+  const checkGoudvisWithNeontetra = () => {
+    const hasGoudvis = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'goudvis'
+    );
+    const hasNeontetra = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'neontetra'
+    );
+    return hasGoudvis && hasNeontetra;
+  };
+
+  const checkGoudvisWithKardinaaltetra = () => {
+    const hasGoudvis = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'goudvis'
+    );
+    const hasKardinaaltetra = storedFishes.some(
+      (fish) => fish.name.toLowerCase() === 'kardinaaltetra'
+    );
+    return hasGoudvis && hasKardinaaltetra;
+  };
+
+  const checkCompatibility = () => {
+    return (
+      !checkGuppyWithBetta() &&
+      !checkGoudvisWithNeontetra() &&
+      !checkGoudvisWithKardinaaltetra()
+    );
+  };
+
+  const shouldDisplayGoodCompatibilityText = storedFishes.length > 1;
+
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
@@ -123,6 +163,29 @@ const FishSearchBar: React.FC<FishSearchBarProps> = ({
           </View>
         ))}
       </View>
+      {shouldDisplayGoodCompatibilityText && checkCompatibility() && (
+        <Text style={styles.goodCompatibilityText}>
+          Deze vissen passen goed bij elkaar.
+        </Text>
+      )}
+      {checkGuppyWithBetta() && (
+        <Text style={styles.warningText}>
+          Wij raden af om Guppy's en Betta's tegelijk in hetzelfde aquarium te
+          houden.
+        </Text>
+      )}
+      {checkGoudvisWithNeontetra() && (
+        <Text style={styles.warningText}>
+          Wij raden af om goudvissen en neontetra's tegelijk in hetzelfde
+          aquarium te houden.
+        </Text>
+      )}
+      {checkGoudvisWithKardinaaltetra() && (
+        <Text style={styles.warningText}>
+          Wij raden af om goudvissen en kardinaaltetra's tegelijk in hetzelfde
+          aquarium te houden.
+        </Text>
+      )}
     </View>
   );
 };
@@ -195,6 +258,16 @@ const styles = StyleSheet.create({
   minusButton: {
     color: 'red',
     fontSize: 24,
+  },
+  goodCompatibilityText: {
+    marginTop: 10,
+    color: 'green',
+    fontSize: 16,
+  },
+  warningText: {
+    color: 'red',
+    fontSize: 16,
+    marginTop: 20,
   },
 });
 
