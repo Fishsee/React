@@ -12,12 +12,10 @@ import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
 import { SearchModal } from '@/components/settings/search-modal'; // Import the SearchModal component
 import { ToggleItem } from '@/components/settings/toggle-item';
-import { useAuth } from '@/core';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { ArrowLeft, Code, Disconnect, Feed, Support, Wifi } from '@/ui/icons';
 
 const Settings: React.FC = () => {
-  const signOut = useAuth.use.signOut();
   const { colorScheme } = useColorScheme();
   const iconColor =
     colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[500];
@@ -116,7 +114,12 @@ const Settings: React.FC = () => {
 
           <View>
             <ItemsContainer>
-              <Item text="settings.logout" onPress={signOut} />
+              <Item
+                text="settings.logout"
+                onPress={() => {
+                  router.replace('/login');
+                }}
+              />
             </ItemsContainer>
           </View>
         </View>
