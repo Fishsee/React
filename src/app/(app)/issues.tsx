@@ -27,6 +27,9 @@ function Issues() {
             mainText="pH waarde laag"
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}
+            onPress={() => {
+              router.replace('/issue-single');
+            }}
           />
           <IssueCard
             iconLeft={<Share color={colors.neutral[600]} />}
