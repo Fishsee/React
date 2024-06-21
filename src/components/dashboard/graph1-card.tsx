@@ -1,8 +1,9 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import useAuthToken from '@/hooks/useAuthToken';
+import UserContext from '@/contexts/user-context';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -11,6 +12,16 @@ const DashboardCard: React.FC = () => {
   const [aquariumId, setAquariumId] = useState('');
   const [phValue, setPhValue] = useState('');
   const token = useAuthToken();
+
+  const MyComponent = () => {
+    const { userName } = useContext(UserContext);
+
+    return (
+      <View>
+        <Text>Welcome, {userName}!</Text>
+      </View>
+    );
+  };
 
   useEffect(() => {
     if (token) {

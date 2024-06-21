@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { APIProvider } from '@/api';
 import { hydrateAuth, loadSelectedTheme } from '@/core';
 import { useThemeConfig } from '@/core/use-theme-config';
+import UserProvider from '@/providers/userprovider';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -58,10 +59,12 @@ function Providers({ children }: { children: React.ReactNode }) {
     >
       <ThemeProvider value={theme}>
         <APIProvider>
-          <BottomSheetModalProvider>
-            {children}
-            <FlashMessage position="top" />
-          </BottomSheetModalProvider>
+          <UserProvider>
+            <BottomSheetModalProvider>
+              {children}
+              <FlashMessage position="top" />
+            </BottomSheetModalProvider>
+          </UserProvider>
         </APIProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
