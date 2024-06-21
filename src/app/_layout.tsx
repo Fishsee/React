@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { APIProvider } from '@/api';
 import { hydrateAuth, loadSelectedTheme } from '@/core';
 import { useThemeConfig } from '@/core/use-theme-config';
+import UserProvider from '@/providers/userprovider';
 
 export { ErrorBoundary } from 'expo-router';
 
@@ -39,6 +40,12 @@ function RootLayoutNav() {
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
         <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="register" options={{ headerShown: false }} />
+        <Stack.Screen name="forgot-password" options={{ headerShown: false }} />
+        <Stack.Screen name="code" options={{ headerShown: false }} />
+        <Stack.Screen name="issue-single" options={{ headerShown: false }} />
+        <Stack.Screen name="issues" options={{ headerShown: false }} />
+        <Stack.Screen name="settings" options={{ headerShown: false }} />
+        <Stack.Screen name="demonstratie" options={{ headerShown: false }} />
       </Stack>
     </Providers>
   );
@@ -53,10 +60,12 @@ function Providers({ children }: { children: React.ReactNode }) {
     >
       <ThemeProvider value={theme}>
         <APIProvider>
-          <BottomSheetModalProvider>
-            {children}
-            <FlashMessage position="top" />
-          </BottomSheetModalProvider>
+          <UserProvider>
+            <BottomSheetModalProvider>
+              {children}
+              <FlashMessage position="top" />
+            </BottomSheetModalProvider>
+          </UserProvider>
         </APIProvider>
       </ThemeProvider>
     </GestureHandlerRootView>

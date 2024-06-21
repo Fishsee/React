@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as z from 'zod';
@@ -14,14 +14,14 @@ const schema = z.object({
   name: z.string().optional(),
   email: z
     .string({
-      required_error: 'Email is required',
+      required_error: 'Email is verplicht',
     })
-    .email('Invalid email format'),
+    .email('Ongeldig e-mailadres'),
   password: z
     .string({
-      required_error: 'Password is required',
+      required_error: 'Wachtwoord is verplicht',
     })
-    .min(6, 'Password must be at least 6 characters'),
+    .min(6, 'Wachtwoord moet minimaal 6 tekens bevatten'),
 });
 
 export type FormType = z.infer<typeof schema>;
@@ -32,6 +32,7 @@ export type LoginFormProps = {
 
 // eslint-disable-next-line max-lines-per-function
 export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const { handleSubmit, control } = useForm<FormType>({
     resolver: zodResolver(schema),
   });
@@ -43,8 +44,16 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
   };
 
   return (
-    <View className="flex-1 p-4 pt-52">
-      <Text testID="form-title" className="text-b pb-6 text-[30px] font-bold">
+    <View className="flex-1 p-4" style={{ paddingTop: 250 }}>
+      <Image
+        source={require('/assets/logo.png')} // Make sure to replace with your actual logo path
+        style={styles.logo}
+      />
+      <Text
+        testID="form-title"
+        className="text-b pb-6 text-[30px] font-bold"
+        style={{ fontSize: 30 }}
+      >
         Inloggen
       </Text>
 
@@ -61,8 +70,24 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
         name="password"
         label="Wachtwoord"
         placeholder="***"
-        secureTextEntry={true}
+        // Use the state variable for the secureTextEntry prop
+        secureTextEntry={!passwordVisible}
         style={{ backgroundColor: '#FFF', marginBottom: 20 }}
+        // Add a button to toggle password visibility
+        right={
+          <Text
+            style={{
+              fontSize: 15,
+              fontWeight: '600',
+              marginLeft: 10,
+              position: 'absolute',
+              right: 0,
+            }}
+            onPress={() => setPasswordVisible(!passwordVisible)}
+          >
+            {passwordVisible ? 'Wachtwoord verbergen' : 'Wachtwoord weergeven'}
+          </Text>
+        }
       />
       <Button
         testID="login-button"
@@ -110,7 +135,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
             style={styles.modalButton}
             onPress={() => {
               // Handle reset via email
-              router.navigate('/reset-email');
+              router.navigate('/forgot-password');
               toggleModal();
             }}
           >
@@ -153,6 +178,14 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
 };
 
 const styles = StyleSheet.create({
+  logo: {
+    position: 'absolute',
+    top: 75,
+    width: 73,
+    height: 65,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
   modal: {
     justifyContent: 'flex-end',
     margin: 0,

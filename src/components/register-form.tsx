@@ -1,9 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { router } from 'expo-router';
 import React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'; // Make sure to install this package
 import * as z from 'zod';
 
@@ -36,6 +37,17 @@ export const RegisterForm = ({ onSubmit = () => {} }: RegisterFormProps) => {
 
   return (
     <View className="flex-1 p-4">
+      <Image
+        source={require('/assets/logo.png')} // Make sure to replace with your actual logo path
+        style={{
+          position: 'absolute',
+          top: 75,
+          width: 73,
+          height: 65,
+          alignSelf: 'center',
+          marginBottom: 20,
+        }}
+      />
       <TouchableOpacity
         style={{ flexDirection: 'row', alignItems: 'center', marginTop: 65 }}
         onPress={() => router.navigate('login')}
@@ -48,7 +60,8 @@ export const RegisterForm = ({ onSubmit = () => {} }: RegisterFormProps) => {
 
       <Text
         testID="form-title"
-        className="text-b pb-6 pt-28 text-[30px] font-bold"
+        className="text-b pb-6 font-bold"
+        style={{ paddingTop: 160, fontSize: 30 }}
       >
         Account aanmaken
       </Text>

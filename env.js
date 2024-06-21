@@ -36,8 +36,8 @@ require('dotenv').config({
 const BUNDLE_ID = 'com.fishseeappdev'; // ios bundle id
 const PACKAGE = 'com.fishseeappdev'; // android package name
 const NAME = 'FishSeeAppDev'; // app name
-const EXPO_ACCOUNT_OWNER = 'expo-owner'; // expo account owner
-const EAS_PROJECT_ID = 'c3e1075b-6fe7-4686-aa49-35b46a229044'; // eas project id
+const EXPO_ACCOUNT_OWNER = 'bramhuiskes'; // expo account owner
+const EAS_PROJECT_ID = 'ef628319-0482-4710-8c6a-54fe22fd5e31'; // eas project id
 const SCHEME = 'FishSeeAppDev'; // app scheme
 
 /**

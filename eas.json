@@ -3,6 +3,11 @@
     "version": ">= 0.57.0"
   },
   "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      }
+    },
     "production": {
       "channel": "production",
       "distribution": "store",
@@ -19,7 +24,7 @@
         "APP_ENV": "production",
         "FLIPPER_DISABLE": "1"
       },
-      "prebuildCommand": "prebuild --skip-dependency-update react",
+      "prebuildCommand": "pnpm install",
       "cache": {
         "key": "eas-1"
       }
@@ -41,7 +46,7 @@
         "FLIPPER_DISABLE": "1"
       },
 
-      "prebuildCommand": "prebuild --skip-dependency-update react",
+      "prebuildCommand": "pnpm install",
       "cache": {
         "key": "eas-1"
       }

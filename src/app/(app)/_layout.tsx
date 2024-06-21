@@ -1,13 +1,15 @@
 /* eslint-disable react/no-unstable-nested-components */
-import { Link, Redirect, SplashScreen, Tabs } from 'expo-router';
+import { Redirect, router, SplashScreen, Tabs } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
 
 import { useAuth, useIsFirstTime } from '@/core';
-import { Pressable, Text } from '@/ui';
+import { TouchableOpacity } from '@/ui';
 import {
   Feed as FeedIcon,
+  Issues as IssuesIcon,
+  Potential,
   Settings as SettingsIcon,
-  Style as StyleIcon,
+  Stats,
 } from '@/ui/icons';
 
 export default function TabLayout() {
@@ -35,41 +37,44 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Dashboard',
+          title: 'Overzicht',
           tabBarIcon: ({ color }) => <FeedIcon color={color} />,
-          headerRight: () => <CreateNewPostLink />,
+          headerRight: () => (
+            <TouchableOpacity onPress={() => router.replace('/settings')}>
+              <SettingsIcon color={'#1a1a1a'} style={{ marginRight: 20 }} />
+            </TouchableOpacity>
+          ),
           tabBarTestID: 'feed-tab',
         }}
       />
 
       <Tabs.Screen
-        name="style"
+        name="issues"
         options={{
-          title: 'Style',
+          title: 'Problemen',
           headerShown: false,
-          tabBarIcon: ({ color }) => <StyleIcon color={color} />,
-          tabBarTestID: 'style-tab',
+          tabBarIcon: ({ color }) => <IssuesIcon color={color} />,
+          tabBarTestID: 'issues-tab',
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="potential-issues"
         options={{
-          title: 'Settings',
+          title: 'Potentieel',
           headerShown: false,
-          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
-          tabBarTestID: 'settings-tab',
+          tabBarIcon: ({ color }) => <Potential color={color} />,
+          tabBarTestID: 'potential-issues-tab',
+        }}
+      />
+      <Tabs.Screen
+        name="statistics"
+        options={{
+          title: 'Statistieken',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Stats color={color} />,
+          tabBarTestID: 'stats-tab',
         }}
       />
     </Tabs>
   );
 }
-
-const CreateNewPostLink = () => {
-  return (
-    <Link href="/feed/add-post" asChild>
-      <Pressable>
-        <Text className="px-3 text-primary-300">Create</Text>
-      </Pressable>
-    </Link>
-  );
-};
