@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet } from 'react-native';
 
 import PotentialProblemCard from '@/components/potential-problem-card';
@@ -9,7 +9,58 @@ import TipCard from '@/components/tip-card';
 import { FocusAwareStatusBar, SafeAreaView, Text, View } from '@/ui';
 import { ArrowLeft } from '@/ui/icons';
 
+interface DataItem {
+  predicted_values: number[];
+}
+
+const iconMap: { [key: string]: any } = {
+  acidity: require('../../../assets/img/ph.png'),
+  turbidity: require('../../../assets/img/troebel.png'),
+  flow: require('../../../assets/img/voedsel.png'),
+  waterlevel: require('../../../assets/img/temp.png'),
+};
+
 function Issues() {
+  const [data, setData] = useState<{ [key: string]: DataItem } | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+  const [wqi, setWqi] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://fishsee.aeternaserver.net/api/predict'
+        );
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const result = await response.json();
+        console.log(result);
+        setData(result);
+        setWqi(result.wqi);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error);
+        } else {
+          setError(new Error('An unknown error occurred'));
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
   return (
     <>
       <FocusAwareStatusBar />
@@ -41,43 +92,31 @@ function Issues() {
               </Text>
             </View>
             <SafeAreaView>
-              <WaterQuality title="Waterkwaliteit" index={0.8} />
+              <WaterQuality title="Waterkwaliteit" index={wqi || 0} />
             </SafeAreaView>
           </View>
         </View>
         <View style={styles.potentialSection}>
           <Text style={{ fontSize: 22 }}>Potentiële problemen</Text>
           <View style={styles.potentialProblemRow}>
-            <PotentialProblemCard
-              icon={require('../../../assets/img/temp.png')}
-              problem="30°"
-              label="Tempratuur"
-              iconWidth={30}
-              iconHeight={30}
-            />
-            <PotentialProblemCard
-              icon={require('../../../assets/img/ph.png')}
-              problem="7"
-              label="PH-Waarde"
-              iconWidth={30}
-              iconHeight={30}
-            />
-          </View>
-          <View style={styles.potentialProblemRow}>
-            <PotentialProblemCard
-              icon={require('../../../assets/img/troebel.png')}
-              problem="Matig"
-              label="Troebelheid"
-              iconWidth={26}
-              iconHeight={30}
-            />
-            <PotentialProblemCard
-              icon={require('../../../assets/img/voedsel.png')}
-              problem="Matig"
-              label="Voedsel"
-              iconWidth={26}
-              iconHeight={26}
-            />
+            {data &&
+              Object.keys(data).map((key, index) => {
+                const item = data[key];
+                if (key !== 'wqi') {
+                  return (
+                    <PotentialProblemCard
+                      key={index}
+                      icon={iconMap[key]}
+                      problem={item.predicted_values[0].toString()}
+                      label={key.charAt(0).toUpperCase() + key.slice(1)}
+                      iconWidth={30}
+                      iconHeight={30}
+                      style={styles.problemCard}
+                    />
+                  );
+                }
+                return null;
+              })}
           </View>
         </View>
         <View style={styles.tipsSection}>
@@ -100,7 +139,6 @@ const styles = StyleSheet.create({
     height: 450,
     borderRadius: 25,
   },
-
   problemContainer: {
     marginTop: 85,
     marginBottom: 20,
@@ -112,34 +150,30 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginLeft: 15,
   },
-  potentialProblem: {
-    width: 150,
-    height: 70,
-    backgroundColor: '#fff',
-    marginTop: 20,
-    borderWidth: 1,
-    borderRadius: 15,
-    borderColor: '#CCCCCC',
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  potentialProblemText: {
-    width: 105,
-    marginLeft: 5,
-  },
   potentialProblemRow: {
-    display: 'flex',
     flexDirection: 'row',
-    gap: 30,
+    flexWrap: 'wrap',
     width: '100%',
-    paddingLeft: 10,
+    justifyContent: 'center',
+    alignContent: 'stretch',
+    gap: 15,
+  },
+
+  problemCard: {
+    flex: 1,
+    margin: 5,
   },
   tipsSection: {
     marginTop: 40,
     marginLeft: 15,
     paddingBottom: 40,
+  },
+  warningContainer: {
+    padding: 10,
+    backgroundColor: '#ffdddd',
+    borderRadius: 10,
+    marginVertical: 5,
+    flex: 1,
   },
 });
 
