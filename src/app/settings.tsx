@@ -17,6 +17,9 @@ import { ToggleItem } from '@/components/settings/toggle-item';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { ArrowLeft, Code, Disconnect, Feed, Support, Wifi } from '@/ui/icons';
 import { Checkmark } from '@/ui/icons/checkmark';
+import { useEffect } from 'react';
+import axios from 'axios';
+import Slider from '@react-native-community/slider';
 
 const Settings: React.FC = () => {
   const { colorScheme } = useColorScheme();
@@ -27,6 +30,14 @@ const Settings: React.FC = () => {
   const [isCodeModalVisible, setCodeModalVisible] = useState(false);
   const [isAddFishModalVisible, setAddFishModalVisible] = useState(false);
   const [isPhPopUpVisible, setPhPopUpVisible] = useState(false);
+  const [sliderValue, setSliderValue] = useState(50);
+
+  const roundValue = (value: number) => {
+    const possibleValues = [0, 25, 50, 75, 100];
+    return possibleValues.reduce((prev, curr) =>
+      Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
+    );
+  };
 
   const handleConnectWifi = () => {
     setSearchModalVisible(true);
@@ -48,6 +59,24 @@ const Settings: React.FC = () => {
   const handlePhPopUp = () => {
     setPhPopUpVisible(true);
   };
+
+  useEffect(() => {
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          'https://api.example.com/brightness',
+          {
+            value: sliderValue,
+          }
+        );
+        console.log('Data posted:', response.data);
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
+    };
+
+    postData();
+  }, [sliderValue]);
 
   return (
     <>
@@ -86,8 +115,21 @@ const Settings: React.FC = () => {
             />
           </ItemsContainer>
 
-          <ItemsContainer title="settings.aquariumBrightness">
-            <BrightnessLevelScroller initialValue={50} />
+          <ItemsContainer title="settings.sliderExample">
+            <Text className="mb-2" style={{ marginTop: 15, fontSize: 17 }}>
+              Brightness Level: {sliderValue}
+            </Text>
+            <Slider
+              style={{ width: 350, height: 40 }}
+              minimumValue={0}
+              maximumValue={100}
+              step={1}
+              value={sliderValue}
+              onValueChange={(val) => setSliderValue(roundValue(val))}
+              minimumTrackTintColor="#00008B"
+              maximumTrackTintColor="#00008B"
+              thumbTintColor="#00008B"
+            />
           </ItemsContainer>
           <Text className="mb-2" style={{ marginTop: 15, fontSize: 17 }}>
             Acties
