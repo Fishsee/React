@@ -115,7 +115,7 @@ const Settings: React.FC = () => {
             />
           </ItemsContainer>
 
-          <ItemsContainer title="settings.sliderExample">
+          <ItemsContainer title="settings.brightnessSlider">
             <Text className="mb-2" style={{ marginTop: 15, fontSize: 17 }}>
               Brightness Level: {sliderValue}
             </Text>

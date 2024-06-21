@@ -3,7 +3,7 @@ import React from 'react';
 
 import IssueCard from '@/components/issue-card';
 import { colors, FocusAwareStatusBar, Text, View } from '@/ui';
-import { ArrowLeft, ArrowRight, Share } from '@/ui/icons';
+import { ArrowLeft, ArrowRight, Share, Issues as IssuesIcon } from '@/ui/icons';
 
 function Issues() {
   return (
@@ -23,7 +23,7 @@ function Issues() {
 
         <View className="flex flex-1 items-center pt-4">
           <IssueCard
-            iconLeft={<Share color={colors.neutral[600]} />}
+            iconLeft={<IssuesIcon color={colors.neutral[400]} />}
             mainText="pH waarde laag"
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}
@@ -32,19 +32,19 @@ function Issues() {
             }}
           />
           <IssueCard
-            iconLeft={<Share color={colors.neutral[600]} />}
+            iconLeft={<IssuesIcon color={colors.neutral[400]} />}
             mainText="Voedselniveau laag"
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}
           />
           <IssueCard
-            iconLeft={<Share color={colors.neutral[600]} />}
+            iconLeft={<IssuesIcon color={colors.neutral[400]} />}
             mainText="Turbiditeit hoog"
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}
           />
           <IssueCard
-            iconLeft={<Share color={colors.neutral[600]} />}
+            iconLeft={<IssuesIcon color={colors.neutral[400]} />}
             mainText="Watercirculatie laag"
             subText="Urgent"
             iconRight={<ArrowRight color={colors.neutral[400]} />}

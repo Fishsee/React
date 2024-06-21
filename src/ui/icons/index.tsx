@@ -20,3 +20,4 @@ export * from './style';
 export * from './support';
 export * from './website';
 export * from './wifi';
+export * from './issues';
