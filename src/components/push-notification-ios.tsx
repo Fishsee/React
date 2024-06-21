@@ -27,8 +27,9 @@ class PushNotificationConfig {
 
   localNotification() {
     PushNotification.localNotification({
-      title: 'Titel',
-      message: 'Bericht',
+      title: '🚨 Lage pH-waarde!',
+      message:
+        'De pH-waarde van uw aquarium is te laag en kan schadelijk zijn voor uw vissen. Open de app om het probleem op te lossen.',
     });
   }
 }

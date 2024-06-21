@@ -114,7 +114,7 @@ const Settings: React.FC = () => {
             />
           </ItemsContainer>
 
-          <ItemsContainer title="settings.brightnessSlider">
+          <ItemsContainer title="settings.sliderExample">
             <Text className="mb-2" style={{ marginTop: 15, fontSize: 17 }}>
               Brightness Level: {sliderValue}
             </Text>
@@ -174,6 +174,12 @@ const Settings: React.FC = () => {
                 text="settings.logout"
                 onPress={() => {
                   router.replace('/login');
+                }}
+              />
+              <Item
+                text="Demonstratie (PROTO)"
+                onPress={() => {
+                  router.replace('/demonstratie');
                 }}
               />
             </ItemsContainer>

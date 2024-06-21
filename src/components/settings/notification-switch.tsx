@@ -1,6 +1,6 @@
-// components/NotificationSwitch.tsx
 import React from 'react';
-import { StyleSheet, Switch, Text, View } from 'react-native';
+import { Button, StyleSheet, Switch, Text, View } from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
 interface NotificationSwitchProps {
   isEnabled: boolean;
@@ -13,6 +13,13 @@ const NotificationSwitch: React.FC<NotificationSwitchProps> = ({
   toggleSwitch,
   label,
 }) => {
+  const triggerTestNotification = () => {
+    PushNotification.localNotification({
+      title: 'Test Notification',
+      message: 'This is a test notification triggered by a button press.',
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
@@ -23,6 +30,7 @@ const NotificationSwitch: React.FC<NotificationSwitchProps> = ({
         onValueChange={toggleSwitch}
         value={isEnabled}
       />
+      <Button title="Test Notification" onPress={triggerTestNotification} />
     </View>
   );
 };

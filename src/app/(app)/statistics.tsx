@@ -1,17 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react';
+/* eslint-disable max-lines-per-function */
+import { router } from 'expo-router';
+import React, { useContext, useEffect, useState } from 'react';
 import {
-  View,
-  StyleSheet,
+  ActivityIndicator,
   SafeAreaView,
   ScrollView,
+  StyleSheet,
   Text,
-  ActivityIndicator,
+  View,
 } from 'react-native';
+
 import SensorStat from '@/components/sensor-stat';
-import useAuthToken from '@/hooks/useAuthToken';
 import UserContext from '@/contexts/user-context';
+import useAuthToken from '@/hooks/useAuthToken';
 import { ArrowLeft } from '@/ui/icons';
-import { router } from 'expo-router';
 
 interface DataPoint {
   phValue?: string;
@@ -84,7 +86,6 @@ const Statistics = () => {
       setLoading(false);
       return;
     }
-
     const urls = {
       ph: `https://fishsee.aeternaserver.net/api/all-PH/${aquariumId}`,
       turbidity: `https://fishsee.aeternaserver.net/api/all-troebelheid/${aquariumId}`,
