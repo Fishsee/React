@@ -1,13 +1,15 @@
 /* eslint-disable max-lines-per-function */
 // Settings.tsx
+import Slider from '@react-native-community/slider';
+import axios from 'axios';
 import { router } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { ActionButton } from '@/components/settings/action-button';
 import { AddFishModal } from '@/components/settings/add-fish-modal'; // Import the AddFishModal component
-import { BrightnessLevelScroller } from '@/components/settings/brightness-level-scroller';
 import { CodeModal } from '@/components/settings/code-modal';
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
@@ -17,9 +19,6 @@ import { ToggleItem } from '@/components/settings/toggle-item';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { ArrowLeft, Code, Disconnect, Feed, Support, Wifi } from '@/ui/icons';
 import { Checkmark } from '@/ui/icons/checkmark';
-import { useEffect } from 'react';
-import axios from 'axios';
-import Slider from '@react-native-community/slider';
 
 const Settings: React.FC = () => {
   const { colorScheme } = useColorScheme();
