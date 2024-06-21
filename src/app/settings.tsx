@@ -3,6 +3,7 @@
 import { router } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 import React, { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { ActionButton } from '@/components/settings/action-button';
 import { AddFishModal } from '@/components/settings/add-fish-modal'; // Import the AddFishModal component
@@ -10,10 +11,12 @@ import { BrightnessLevelScroller } from '@/components/settings/brightness-level-
 import { CodeModal } from '@/components/settings/code-modal';
 import { Item } from '@/components/settings/item';
 import { ItemsContainer } from '@/components/settings/items-container';
+import { PhPopUp } from '@/components/settings/ph-pop-up'; // Zorg ervoor dat dit correct is
 import { SearchModal } from '@/components/settings/search-modal'; // Import the SearchModal component
 import { ToggleItem } from '@/components/settings/toggle-item';
 import { colors, FocusAwareStatusBar, ScrollView, Text, View } from '@/ui';
 import { ArrowLeft, Code, Disconnect, Feed, Support, Wifi } from '@/ui/icons';
+import { Checkmark } from '@/ui/icons/checkmark';
 
 const Settings: React.FC = () => {
   const { colorScheme } = useColorScheme();
@@ -23,6 +26,8 @@ const Settings: React.FC = () => {
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const [isCodeModalVisible, setCodeModalVisible] = useState(false);
   const [isAddFishModalVisible, setAddFishModalVisible] = useState(false);
+  const [isPhPopUpVisible, setPhPopUpVisible] = useState(false);
+
   const handleConnectWifi = () => {
     setSearchModalVisible(true);
     // Simulate searching for devices
@@ -38,6 +43,10 @@ const Settings: React.FC = () => {
 
   const handleAddFish = () => {
     setAddFishModalVisible(true);
+  };
+
+  const handlePhPopUp = () => {
+    setPhPopUpVisible(true);
   };
 
   return (
@@ -103,10 +112,16 @@ const Settings: React.FC = () => {
               iconBackgroundColor={colors.neutral[600]}
             />
             <ActionButton
+              icon={<Checkmark color={colors.neutral[100]} />}
+              title={'PH+ tablet toevoegen'}
+              onPress={handlePhPopUp}
+              iconBackgroundColor={colors.neutral[600]}
+            />
+            <ActionButton
               icon={<Disconnect color={colors.neutral[100]} />}
               title={'Disconnect Aquarium'}
               onPress={() => {
-                router.replace('/issue-single');
+                router.replace('/login');
               }}
               iconBackgroundColor={colors.danger[500]}
             />
@@ -133,11 +148,55 @@ const Settings: React.FC = () => {
         visible={isCodeModalVisible}
         onClose={() => setCodeModalVisible(false)}
       />
-
       <AddFishModal
         visible={isAddFishModalVisible}
         onClose={() => setAddFishModalVisible(false)}
       />
+      <PhPopUp
+        visible={isPhPopUpVisible}
+        onClose={() => setPhPopUpVisible(false)}
+      >
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: 'center',
+            marginTop: 20,
+            marginBottom: 10,
+          }}
+        >
+          Weet u zeker dat u een PH+ tablet in uw aquarium wilt laten vallen?
+        </Text>
+        <View style={{ flexDirection: 'row', columnGap: 20, marginTop: 20 }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#007BFF',
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderRadius: 5,
+              marginHorizontal: 5,
+            }}
+            onPress={() => setPhPopUpVisible(false)}
+          >
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600' }}>
+              Ja
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#007BFF',
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderRadius: 5,
+              marginHorizontal: 5,
+            }}
+            onPress={() => setPhPopUpVisible(false)}
+          >
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600' }}>
+              Nee
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </PhPopUp>
     </>
   );
 };
