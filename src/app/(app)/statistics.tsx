@@ -10,6 +10,8 @@ import {
 import SensorStat from '@/components/sensor-stat';
 import useAuthToken from '@/hooks/useAuthToken';
 import UserContext from '@/contexts/user-context';
+import { ArrowLeft } from '@/ui/icons';
+import { router } from 'expo-router';
 
 interface DataPoint {
   phValue?: string;
@@ -157,7 +159,18 @@ const Statistics = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        <Text style={styles.userNameText}>Statistieken sensoren</Text>
+        <View className="flex-1 px-4 pb-56">
+          <View className="flex flex-row items-center justify-center">
+            <ArrowLeft
+              className="absolute left-0 mr-2"
+              style={{ position: 'absolute', left: 0 }}
+              onPress={() => {
+                router.replace('/');
+              }}
+            />
+            <Text className="text-xl font-semibold">Statestieken</Text>
+          </View>
+        </View>
         {!token ? (
           <Text style={styles.errorText}>
             No token available, data cannot be fetched.
