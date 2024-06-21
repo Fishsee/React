@@ -72,8 +72,8 @@ const Statistics = () => {
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    if (!userName || !aquariumId) {
-      console.log('Missing required information:', { userName, aquariumId });
+    if (!aquariumId) {
+      console.log('Missing required information:', { aquariumId });
       return;
     }
 
@@ -126,7 +126,7 @@ const Statistics = () => {
           console.log('Retrying fetch...');
           setTimeout(() => {
             setAttempt((prev) => prev + 1);
-          }, 2000); // Retry after 2 seconds
+          }, 2000);
         } else {
           setLoading(false);
         }
@@ -136,7 +136,7 @@ const Statistics = () => {
     fetchAllData(attempt > 0);
   }, [token, userName, aquariumId, attempt]);
 
-  if (!userName || !aquariumId) {
+  if (!aquariumId) {
     return (
       <SafeAreaView style={styles.loadingContainer}>
         <Text>Waiting for user information...</Text>
